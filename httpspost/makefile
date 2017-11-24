@@ -1,7 +1,7 @@
-CC=arm-uclibc-gcc
-#CC=gcc
+#CC=arm-uclibc-gcc
+CC=gcc
 
-FLAGS = -Wall -Werror -fPIC -g -shared -O2 -s -ldl -lm -o
+FLAGS = -Wall -Werror -fPIC -g3 -shared -O2  -ldl -lm -o
 
 
 
@@ -12,8 +12,10 @@ SSL_ARM_INCLUDE = ../openssl/arm/ssl/include
 SSL_ARM_LIB = ../openssl/arm/ssl/lib
 OBJ_ARM = libhttpspost_arm.so
 
-SSL_X86_INCLUDE = ../openssl/x86/ssl/include
-SSL_X86_LIB = ../openssl/x86/ssl/lib
+#SSL_X86_INCLUDE = /home/sunjor/code/httpsPostClient/openssl/x86/openssl-1.0.0q/static/include
+#SSL_X86_LIB = /home/sunjor/code/httpsPostClient/openssl/x86/openssl-1.0.0q/static/lib
+SSL_X86_INCLUDE = /home/sunjor/code/openssl/StaticLinux64/include
+SSL_X86_LIB = /home/sunjor/code/openssl/StaticLinux64/lib
 OBJ_X86 = libhttpspost_x86.so
 
 
