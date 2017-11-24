@@ -31,7 +31,7 @@ public:
     * @return 是否发送成功，HTTPS_SENTED-成功，HTTPS_SENT_FALSE-失败，当前处于其他状态时返回相应状态
     * @note   只有返回HTTPS_SENTED才算发送成功
     */
-    int Send(string& url, string& reqStr);
+    int Send(string& url,string headers, string& reqStr);
     
     /**
     * @brief  HttpsPost接收函数

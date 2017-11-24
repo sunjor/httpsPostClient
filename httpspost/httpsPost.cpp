@@ -58,17 +58,18 @@ int HttpsPost::Connect(string& host, unsigned int port, h_type type)
 /**
 * @brief  HttpsPost发送函数
 * @param  url      输入参数，URL
+* @param  headers  输入参数,构造请求的头部
 * @param  reqParam 输入参数，POST的数据内容
 * @return 是否发送成功，HTTPS_SENTED-成功，HTTPS_SENT_FALSE-失败，当前处于其他状态时返回相应状态
 * @note   只有返回HTTPS_SENTED才算发送成功
 */
-int HttpsPost::Send(string& url, string& reqParam)
+int HttpsPost::Send(string& url,string& headers， string& reqParam)
 {
     // 只有处于连接状态时才发送数据
     if( HTTPS_CONNECTED == _stat )
     {
         string strHttp;
-        char paramLen[64];
+        //char paramLen[64];
         char strPort[16];
         
         // 组装HTTP报文
@@ -76,14 +77,15 @@ int HttpsPost::Send(string& url, string& reqParam)
         
         // 请求头部
         sprintf(strPort, "%d", _port);
-        strHttp += "Host:" + _host + ":" + strPort + "\r\n";
+        //strHttp += "Host:" + _host + ":" + strPort + "\r\n";
         //strHttp += "User-agent:Mozilla/4.0\r\n";
         //strHttp += "Accept-language:zh-cn\r\n";
         //strHttp += "Accept-Encoding:gzip,deflate\r\n";
-        strHttp += "Content-Type: application/json;charset=utf-8\r\n";
-        strHttp += "Connection:keep-alive\r\n";                                      //保持Tcp请求连接
-        sprintf (paramLen,"Content-Length:%d\r\n", (int)reqParam.size());
-        strHttp += paramLen;
+        //strHttp += "Content-Type: application/json;charset=utf-8\r\n";
+        //strHttp += "Connection:keep-alive\r\n";                                      //保持Tcp请求连接
+        //sprintf (paramLen,"Content-Length:%d\r\n", (int)reqParam.size());
+        //strHttp += paramLen;
+        strHttp += headers;
         strHttp += "\r\n";
         
         strHttp += reqParam;                             // 请求数据

@@ -13,20 +13,23 @@ static void  loadLib(void)
 
 int main()
 {
+    
+    
 
 #if 1
 
     //string ip = "service.evchong.com";
-    string ip = "123.59.53.85";
+    string host = "qun.qq.com";
     string buf;
     string url;
     string param;
+    string headers="";
     HttpsPost httpspost;
     
     do
     {
         //int ret = httpspost.Connect(ip, 443, HOSTNAME_TYPE);
-        int ret = httpspost.Connect(ip, 443, IP_TYPE);
+        int ret = httpspost.Connect(host, 443, HOSTNAME_TYPE);
         if( HTTPS_CONNECTED ==  ret)
         {
             break;
@@ -57,8 +60,17 @@ int main()
     while(1)
     {
         // heartbeat
-        url     = "https://service.evchong.com:443/evchong_API/evchong/v1/heartbeat";
-        param   = "{\"chargeBoxSerialNumber\":{\"chargeBoxSerialNumber\":\"1012090561\"},\"chargePointSerialNumber\":{\"chargePointSerialNumber\":\"CSN00001\"}}";
+        url     = "https://qun.qq.com/cgi-bin/qun_mgr/get_group_list";
+        param   = "bkn=965399296";
+        headers = "Host:qun.qq.com\r\n\
+        Connection: keep-alive\r\n\
+        Accept-Encoding: gzip, deflate\r\n\
+        Accept: */*\r\n\
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:27.0) Gecko/20100101 Firefox/27.0\r\n\
+        Content-Type: application/x-www-form-urlencoded; charset=UTF-8\r\n\
+        Referer: http://qun.qq.com/member.html\r\n\
+        Origin: http://d1.web2.qq.com\r\n\
+        Cookie: RK=fhE6TutaOT; pgv_pvid=6065426609; ts_uid=6459404007; ptcz=803b31de94a8debb0ddfb7ca2dfb2f1b4a273c264ac85e6dc85ed67837c9e7c0; pt2gguin=o1477981949; uin=o1477981949; skey=Z2O5l3Ut5n\r\n"
         
         httpspost.State();
         //if(httpspost.State() == HTTPS_FREE)
@@ -66,7 +78,7 @@ int main()
             do
             {
                 //int ret = httpspost.Connect(ip, 443, HOSTNAME_TYPE);
-                int ret = httpspost.Connect(ip, 443, IP_TYPE);
+                int ret = httpspost.Connect(host, 443, HOSTNAME_TYPE);
                 if( HTTPS_CONNECTED ==  ret)
                 {
                     connectCouter++;
@@ -82,7 +94,7 @@ int main()
             }while(1);
         }
 
-        if( HTTPS_SENTED == httpspost.Send(url, param) )
+        if( HTTPS_SENTED == httpspost.Send(url, headers,param) )
         {
             cout<< ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> send heartbeat" << endl;
             while(1)
