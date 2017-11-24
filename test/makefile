@@ -1,7 +1,7 @@
-CC=arm-uclibc-gcc
-#CC=gcc
+#CC=arm-uclibc-gcc
+CC=gcc
 
-FLAGS = -Wall -Werror -fPIC -g -O2 -s -ldl -lm -o
+FLAGS = -Wall -Werror -fPIC -g -O2  -ldl -lm -o
 
 
 SC_LIBRARY_PATH = ../httpspost
@@ -22,7 +22,7 @@ endif
 
     
 $(OBJ): $(SOURCE_FILE)
-	$(CC) $(FLAGS)  $@  $(SOURCE_FILE) -I$(SSL_INCLUDE) -L$(SC_LIBRARY_PATH) $(LIB)
+	$(CC)  $(FLAGS)  $@  $(SOURCE_FILE) -I$(SSL_INCLUDE) -L$(SC_LIBRARY_PATH) $(LIB) -pthread
 
     
 #SERVER_SOURCE_FILE = server.c
